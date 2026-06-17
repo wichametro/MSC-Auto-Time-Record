@@ -16,9 +16,7 @@ cd MSC-Auto-Time-Record
 pip install -r requirements.txt
 python -m playwright install chromium
 
-# 3. สร้างไฟล์ .env
-cp .env.example .env
-# แก้ไข .env ใส่ username/password ของตัวเอง
+# 3. แก้ไข .env ใส่ username/password ของตัวเอง
 
 # 4. รัน
 python "TimeRecord Bot.py"
@@ -84,21 +82,14 @@ python -m playwright install chromium
 
 ### Step 4: ตั้งค่า Username & Password
 
-1. คัดลอกไฟล์ `.env.example` เป็น `.env`
-
-```bash
-cp .env.example .env        # macOS
-copy .env.example .env      # Windows
-```
-
-2. เปิดไฟล์ `.env` แล้วแก้ไข:
+เปิดไฟล์ `.env` แล้วแก้ไขใส่ค่าของตัวเอง:
 
 ```env
 USERNAME=your_username
 PASSWORD=your_password
 ```
 
-> ⚠️ ไฟล์ `.env` จะไม่ถูก commit ขึ้น Git (อยู่ใน `.gitignore` แล้ว)
+> ⚠️ หลังแก้แล้ว อย่า commit กลับขึ้น Git (เพราะมี password จริง)
 
 ---
 
@@ -128,11 +119,10 @@ python "TimeRecord Bot.py"
 ## โครงสร้างไฟล์ใน Repo
 
 ```
-MSC - Auto Time Record/
+MSC-Auto-Time-Record/
 ├── TimeRecord Bot.py       # ตัว Bot หลัก
 ├── requirements.txt        # รายการ dependencies
-├── .env.example            # ตัวอย่างไฟล์ config (commit ได้)
-├── .env                    # config จริง (ไม่ commit)
+├── .env                    # ไฟล์ config (clone มาแล้วแก้ username/password ได้เลย)
 ├── .gitignore              # ไฟล์ที่ไม่ให้ Git track
 ├── SETUP.md                # คู่มือนี้
 └── browser-data/           # ข้อมูล browser session (ไม่ commit)
@@ -156,12 +146,11 @@ MSC - Auto Time Record/
 ## Repository
 
 - **GitHub:** https://github.com/wichametro/MSC-Auto-Time-Record
-- **Visibility:** Private (ต้องถูก invite เข้า repo ก่อนถึงจะ clone ได้)
+- **Visibility:** Public (ใครก็ clone ได้)
 
 ---
 
 ## หมายเหตุด้านความปลอดภัย
 
-- ❌ ห้าม commit ไฟล์ `.env` ขึ้น Git (มี password)
-- ✅ ใช้ `.env.example` เป็นตัวอย่างให้คนอื่น copy ไปใช้
+- ⚠️ หลัง clone มาแล้วแก้ `.env` ใส่ password จริง อย่า push กลับขึ้น Git
 - ✅ โฟลเดอร์ `browser-data/` ถูก ignore แล้ว ไม่ต้องกังวล

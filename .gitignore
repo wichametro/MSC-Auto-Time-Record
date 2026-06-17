@@ -1,5 +1,5 @@
 # Environment variables (มี password)
-.env
+# .env   ← ไม่ ignore แล้ว เพราะเป็น template อยู่ใน repo
 
 # Browser session data
 browser-data/
