@@ -9,8 +9,8 @@
 
 ```bash
 # 1. Clone repo
-git clone <repo-url>
-cd "MSC - Auto Time Record"
+git clone https://github.com/wichametro/MSC-Auto-Time-Record.git
+cd MSC-Auto-Time-Record
 
 # 2. ติดตั้ง dependencies
 pip install -r requirements.txt
@@ -58,8 +58,8 @@ python --version
 ### Step 2: Clone โปรเจกต์จาก Git
 
 ```bash
-git clone <repo-url>
-cd "MSC - Auto Time Record"
+git clone https://github.com/wichametro/MSC-Auto-Time-Record.git
+cd MSC-Auto-Time-Record
 ```
 
 ---
@@ -153,27 +153,10 @@ MSC - Auto Time Record/
 
 ---
 
-## สำหรับคนที่จะ Push ขึ้น Git (เจ้าของ Repo)
+## Repository
 
-```bash
-# เริ่ม Git repo (ถ้ายังไม่ได้ init)
-git init
-
-# เพิ่มไฟล์ที่ต้องการ
-git add "TimeRecord Bot.py" requirements.txt .env.example .gitignore SETUP.md
-
-# Commit
-git commit -m "Initial commit: TimeRecord Bot"
-
-# เชื่อม remote repo (สร้างบน GitHub/GitLab ก่อน)
-git remote add origin <repo-url>
-
-# Push
-git push -u origin main
-```
-
-> สิ่งที่ **ไม่ควร** commit: `.env`, `browser-data/`, `__pycache__/`  
-> `.gitignore` จัดการให้แล้ว
+- **GitHub:** https://github.com/wichametro/MSC-Auto-Time-Record
+- **Visibility:** Private (ต้องถูก invite เข้า repo ก่อนถึงจะ clone ได้)
 
 ---
 
