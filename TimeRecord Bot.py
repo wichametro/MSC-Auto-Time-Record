@@ -4,12 +4,15 @@ import random
 from dotenv import load_dotenv
 from playwright.sync_api import Playwright, sync_playwright, expect
 
-load_dotenv(".env.wi")  # โหลดไฟล์ส่วนตัวก่อน (ถ้ามี)
-load_dotenv()          # fallback ไป .env (ถ้า .env.wi ไม่มี)
+load_dotenv(".env.wi")
+load_dotenv()   # โหลด environment variables จากไฟล์ .env
 
 # ตั้งค่า login (อ่านจากไฟล์ .env)
-username = os.getenv("USERNAME", "your_username")
-password = os.getenv("PASSWORD", "your_password")
+username = os.getenv("USERNAME")
+password = os.getenv("PASSWORD")
+
+if not username or not password:
+    raise SystemExit("❌ กรุณาตั้งค่า USERNAME และ PASSWORD ในไฟล์ .env ก่อนรัน")
 
 # ตั้งค่าหมายเหตุ
 causes = ["Work from home", "ไปพบลูกค้า", "ไม่ได้แสกนบัตร"]  # หมายเหตุที่คุณต้องการ
