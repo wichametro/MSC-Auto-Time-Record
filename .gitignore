@@ -1,5 +1,7 @@
-# Environment variables (มี password)
-# .env   ← ไม่ ignore แล้ว เพราะเป็น template อยู่ใน repo
+# Environment variables ส่วนตัว
+.env.wi
+.env.*
+!.env
 
 # Browser session data
 browser-data/

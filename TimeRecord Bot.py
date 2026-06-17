@@ -4,7 +4,8 @@ import random
 from dotenv import load_dotenv
 from playwright.sync_api import Playwright, sync_playwright, expect
 
-load_dotenv()
+load_dotenv(".env.wi")  # โหลดไฟล์ส่วนตัวก่อน (ถ้ามี)
+load_dotenv()          # fallback ไป .env (ถ้า .env.wi ไม่มี)
 
 # ตั้งค่า login (อ่านจากไฟล์ .env)
 username = os.getenv("USERNAME", "your_username")
