@@ -77,23 +77,32 @@ def select_page_size(page, grid_selector: str, size: str = "100"):
         page.wait_for_timeout(1000)
 
     if not dropdown_opened:
-        # Last resort: use Kendo widget API to open dropdown
-        print("🔽 Last resort: Using Kendo widget API to open dropdown...")
+        # Last resort: use Kendo widget API to select the value directly
+        print("🔽 Last resort: Using Kendo widget API to set value directly...")
         page.evaluate(f"""() => {{
             const select = document.querySelector('{grid_selector} .k-pager-sizes select[data-role="dropdownlist"]');
             if (select) {{
                 const widget = $(select).data('kendoDropDownList');
-                if (widget) widget.open();
+                if (widget) {{
+                    widget.value('{size}');
+                    widget.trigger('change');
+                }}
             }}
         }}""")
-        page.wait_for_timeout(500)
-        print("✅ Dropdown opened with Kendo widget API (last resort)")
+        page.wait_for_timeout(1000)
+        print(f"✅ Page size set to {size} via Kendo widget API (last resort)")
+        return
 
     # Select the desired page size from the specific listbox
+    page.wait_for_timeout(300)
     if listbox_id:
-        page.locator(f"#{listbox_id}").get_by_role("option", name=size).click()
+        option = page.locator(f"#{listbox_id}").get_by_role("option", name=size)
     else:
-        page.get_by_role("option", name=size).click()
+        option = page.get_by_role("option", name=size)
+
+    # Scroll option into view and click
+    option.scroll_into_view_if_needed()
+    option.click()
 
     print(f"📄 Page size set to {size}")
 
