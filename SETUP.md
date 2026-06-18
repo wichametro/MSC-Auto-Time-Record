@@ -1,132 +1,85 @@
-# TimeRecord Bot - Setup Guide
+# TimeRecord Bot - Quick Setup
 
-คู่มือสำหรับผู้ใช้ใหม่ที่ต้องการรัน `TimeRecord Bot.py` ผ่าน Kiro  
-รองรับทั้ง **Windows** และ **macOS**
-
----
-
-## Quick Start (สรุปสั้น ๆ)
+## Quick Start
 
 ```bash
-# 1. Clone repo
+# 1. Clone
 git clone https://github.com/wichametro/MSC-Auto-Time-Record.git
 cd MSC-Auto-Time-Record
 
-# 2. ติดตั้ง dependencies
+# 2. Install
 pip install -r requirements.txt
 python -m playwright install chromium
 
-# 3. แก้ไข .env ใส่ username/password ของตัวเอง
+# 3. Config — copy template แล้วใส่ค่าของตัวเอง
+cp .env.template .env.wi
 
-# 4. รัน
+# 4. Run
 python "TimeRecord Bot.py"
 ```
 
 ---
 
-## รายละเอียดทีละ Step
+## Setup by OS
 
-### Step 1: ติดตั้ง Python (3.9+)
-
-#### macOS
+### macOS
 
 ```bash
-# ตรวจสอบว่ามี Python หรือยัง
-python3 --version
-
-# ถ้ายังไม่มี ให้ติดตั้งผ่าน Homebrew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# ถ้ายังไม่มี Python
 brew install python
-```
 
-#### Windows
-
-1. ไปที่ https://www.python.org/downloads/
-2. ดาวน์โหลด Python เวอร์ชันล่าสุด (3.9 ขึ้นไป)
-3. ตอนติดตั้ง **ติ๊กช่อง "Add Python to PATH"** (สำคัญมาก!)
-4. กด Install Now
-
-```powershell
-# ตรวจสอบว่าติดตั้งสำเร็จ
-python --version
-```
-
----
-
-### Step 2: Clone โปรเจกต์จาก Git
-
-```bash
-git clone https://github.com/wichametro/MSC-Auto-Time-Record.git
-cd MSC-Auto-Time-Record
-```
-
----
-
-### Step 3: ติดตั้ง Dependencies
-
-#### macOS
-
-```bash
+# Install dependencies
 pip3 install -r requirements.txt
 python3 -m playwright install chromium
-```
 
-#### Windows
+# Config
+cp .env.template .env.wi
+# แก้ไฟล์ .env.wi ใส่ username/password ของตัวเอง
 
-```powershell
-pip install -r requirements.txt
-python -m playwright install chromium
-```
-
----
-
-### Step 4: ตั้งค่า Username & Password
-
-เปิดไฟล์ `.env` แล้วแก้ไขใส่ค่าของตัวเอง:
-
-```env
-USERNAME=your_username
-PASSWORD=your_password
-```
-
-> ⚠️ หลังแก้แล้ว อย่า commit กลับขึ้น Git (เพราะมี password จริง)
-
----
-
-### Step 5: รัน Bot
-
-#### ผ่าน Terminal ใน Kiro
-
-เปิด Terminal (`Ctrl+\`` หรือ `Cmd+\`` บน macOS):
-
-**macOS:**
-```bash
+# Run
 python3 "TimeRecord Bot.py"
 ```
 
-**Windows:**
+### Windows
+
+1. ติดตั้ง Python จาก https://www.python.org/downloads/ — **ติ๊ก "Add Python to PATH"**
+2. เปิด PowerShell:
+
 ```powershell
+pip install -r requirements.txt
+python -m playwright install chromium
+
+# Config
+copy .env.template .env.wi
+# แก้ไฟล์ .env.wi ใส่ username/password ของตัวเอง
+
+# Run
 python "TimeRecord Bot.py"
 ```
 
-#### ผ่าน Kiro Chat
+---
 
-พิมพ์ในแชท:
-> "รัน TimeRecord Bot.py ให้หน่อย"
+## Config (.env.wi)
+
+Copy จาก `.env.template` แล้วแก้ค่า:
+
+```env
+DUO_USERNAME=your_duo_username
+DUO_PASSWORD=your_duo_password
+
+ESS_USERNAME=your_ess_username
+ESS_PASSWORD=your_ess_password
+```
+
+> ⚠️ ไฟล์ `.env.wi` ถูก gitignore แล้ว — ไม่ต้องกลัว commit password
 
 ---
 
-## โครงสร้างไฟล์ใน Repo
+## ใช้ผ่าน Kiro
 
-```
-MSC-Auto-Time-Record/
-├── TimeRecord Bot.py       # ตัว Bot หลัก
-├── requirements.txt        # รายการ dependencies
-├── .env                    # ไฟล์ config (clone มาแล้วแก้ username/password ได้เลย)
-├── .gitignore              # ไฟล์ที่ไม่ให้ Git track
-├── SETUP.md                # คู่มือนี้
-└── browser-data/           # ข้อมูล browser session (ไม่ commit)
-```
+Copy prompt นี้แปะในแชท:
+
+> รัน `python3 "TimeRecord Bot.py"` ใน terminal ให้หน่อย (macOS) หรือ `python "TimeRecord Bot.py"` (Windows)
 
 ---
 
@@ -134,23 +87,22 @@ MSC-Auto-Time-Record/
 
 | ปัญหา | วิธีแก้ |
 |---|---|
-| `python: command not found` | ลอง `python3` แทน (macOS) หรือติดตั้ง Python ใหม่แล้วติ๊ก Add to PATH (Windows) |
-| `No module named 'playwright'` | รัน `pip install -r requirements.txt` |
-| `No module named 'dotenv'` | รัน `pip install python-dotenv` |
-| `Executable doesn't exist` | รัน `python -m playwright install chromium` |
-| Browser เปิดแล้วค้าง | ตรวจสอบ VPN — ต้องเข้าถึง `mschrmi.metrosystems.co.th` ได้ |
-| Login ไม่ผ่าน | ตรวจสอบ USERNAME/PASSWORD ในไฟล์ `.env` |
+| `python: command not found` | ใช้ `python3` (macOS) หรือติดตั้ง Python ใหม่ + Add to PATH (Windows) |
+| `No module named 'playwright'` | `pip install -r requirements.txt` |
+| `Executable doesn't exist` | `python -m playwright install chromium` |
+| Browser ค้าง | ตรวจสอบ VPN — ต้องเข้าถึง `mschrmi.metrosystems.co.th` ได้ |
+| Login ไม่ผ่าน | ตรวจค่าใน `.env.wi` |
 
 ---
 
-## Repository
+## โครงสร้างไฟล์
 
-- **GitHub:** https://github.com/wichametro/MSC-Auto-Time-Record
-- **Visibility:** Public (ใครก็ clone ได้)
-
----
-
-## หมายเหตุด้านความปลอดภัย
-
-- ⚠️ หลัง clone มาแล้วแก้ `.env` ใส่ password จริง อย่า push กลับขึ้น Git
-- ✅ โฟลเดอร์ `browser-data/` ถูก ignore แล้ว ไม่ต้องกังวล
+```
+MSC-Auto-Time-Record/
+├── TimeRecord Bot.py    # Bot หลัก
+├── requirements.txt     # Dependencies
+├── .env.template        # Template config (commit ได้)
+├── .env.wi              # Config จริง (gitignored)
+├── SETUP.md             # คู่มือนี้
+└── browser-data/        # Browser session (gitignored)
+```
