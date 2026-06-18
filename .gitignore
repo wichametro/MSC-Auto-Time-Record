@@ -1,7 +1,8 @@
 # Environment variables ส่วนตัว
+.env
 .env.wi
 .env.*
-!.env
+!.env.template
 
 # Browser session data
 browser-data/
