@@ -5,9 +5,9 @@ from dotenv import load_dotenv
 from playwright.sync_api import Playwright, sync_playwright, expect
 
 load_dotenv(".env.wi")
-load_dotenv()   # โหลด environment variables จากไฟล์ .env
+load_dotenv(".env.template")   # โหลด environment variables จากไฟล์ .env.template
 
-# ตั้งค่า login (อ่านจากไฟล์ .env)
+# ตั้งค่า login (อ่านจากไฟล์ .env.template)
 duo_username = os.getenv("DUO_USERNAME")
 duo_password = os.getenv("DUO_PASSWORD")
 ess_username = os.getenv("ESS_USERNAME")
